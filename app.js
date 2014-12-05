@@ -31,38 +31,45 @@ var lights = {
 	}
 }
 
+for ( i=1; i<7; i++ ) {
+	gpio.open(lights[i].pin, "output", function(){});
+}
+
 function lightUp(count) {
 
 	console.log("Light " + count + ", pin " + lights[count].pin);
-	gpio.open(lights[count].pin, "output", function(err){
-		gpio.write(lights[count].pin, 1, function(){
-			lights[count].status = 1;
-			gpio.close(lights[count].pin);
-			setTimeout(function(){
 
-				console.log("Light off " + count + ", pin " + lights[count].pin);
-				gpio.open(lights[count].pin, "output", function(err){
-					gpio.write(lights[count].pin, 0, function(){
-						lights[count].status = 0;
-						gpio.close(lights[count].pin);
-					});
+	gpio.write(lights[count].pin, 1, function(){
+		lights[count].status = 1;
+		setTimeout(function(){
+			console.log("Light off " + count + ", pin " + lights[count].pin);
+				gpio.write(lights[count].pin, 0, function(){
+					lights[count].status = 0;
 				});
 
-			}, lights[count].hold);
-		});
+		}, 250);
 	});
 
 }
 
-lightUp(1);
+setInterval(function(){
 
-/*
-gpio.open(7, "output", function(err) {
-    gpio.write(7, 1, function() {
-    	gpio.write(7,0,function(){
-    		gpio.close(7);
-    	});
-        
-    });
+	//Get random number.
+	var number =  Math.floor((Math.random() * 6) + 1); 
+	
+	lightUp(number);
+
+}, 500);
+
+
+process.on('SIGINT', function() {
+	for ( i=1; i<7; i++ ) {
+		var ix = i;
+		gpio.write(lights[ix].pin, 0, function(){
+			gpio.close(lights[ix].pin);
+		});
+	}
+	setTimeout(function(){
+		process.exit();
+	}, 1000);
 });
-*/
