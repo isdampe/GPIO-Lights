@@ -2,7 +2,65 @@
 <html lang="en">
 <head>
 	<title>RC Car</title>
+	<meta charset="utf-8">
+	<style>
+		body {
+			background: #222244;
+			margin: 0;
+			font-family: Arial, sans-serif;
+
+		}
+		.video {
+			width: 1280px;
+			height: 720px;
+			margin: 20px auto;
+			background: #000;
+		}
+		.controls {
+			width: 640px;
+			height: 200px;
+			margin: 20px auto;
+			font-size: 54px;
+			font-weight: bold;
+			color: #fff;
+			cursor: pointer;
+		}
+		.forward {
+			text-align: center;
+			display: block;
+			padding: 10px;
+			width: 31%;
+			margin: 0 auto;
+			border-radius: 10px;
+			background: #111133;
+			opacity: 0.5;
+		}
+		.active {
+			opacity: 1;
+		}
+		@media only screen and (max-width: 1280px) {
+			.video {
+				width: 640px;
+				height: 360px;
+			}
+			.controls {
+				width: 320px;
+				height: 100px;
+			}
+		}
+		@media only screen and (max-width: 640px) {
+			.video {
+				width: 320px;
+				height: 180px;
+			}
+		}
+	</style>
 </head>
 <body>
+	<div class="video">
+	</div>
+	<div class="controls">
+		<div class="forward active">&#8593;</div>
+	</div>
 </body>
 </html>
