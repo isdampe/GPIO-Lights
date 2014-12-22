@@ -34,6 +34,14 @@ pins.init(function(){
 				pins.motor(0);
 
 			break;
+			case "/3":
+				//Steering left.
+				pins.steering(1);
+			break;
+			case "/4":
+				//Steering right.
+				pins.steering(0);
+			break;
 		}
 
 	  res.end(buffer);
