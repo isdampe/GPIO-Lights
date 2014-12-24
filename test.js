@@ -6,11 +6,11 @@ pins.init(function(){
 	pins.writeToAll(1);
 
 	setTimeout(function(){
-		pins.steering(0);
-		pins.motor(1);
+		
+		pins.motor(0);
 
 
-	}, 1000);
+	}, 2000);
 
 /*
 	//Run motor for one second.

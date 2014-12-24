@@ -111,8 +111,10 @@
 		function doKey( element, direction, url ) {
 			element.className = direction + " active";
 			if ( timers[url] === -1 ) {
+
+				timers[url] = 1;
+
 				window.setTimeout(function(){
-					timers[url] = window.setInterval(function(){
 						console.log("Pulse " + direction);
 
 
@@ -136,17 +138,19 @@
 
 						request.send();
 
+				},50);
 
-					}, 500);
-				},100);
 			}
 		}
 
 		window.onkeyup = function(e) {
-			for ( i=0; i<timers.length; i++ ) {
-				clearInterval(timers[i]);
-				timers[i] = -1;
-			}
+			
+			window.setTimeout(function(){
+				for ( i=0; i<timers.length; i++ ) {
+					timers[i] = -1;
+				}
+				console.log("Unlock key");
+			}, 250);
 			forward.className = "forward";
 			down.className = "down";
 			left.className = "left";
